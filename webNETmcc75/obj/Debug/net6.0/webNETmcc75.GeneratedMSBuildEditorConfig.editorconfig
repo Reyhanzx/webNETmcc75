@@ -16,26 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\reyhan\source\repos\webNETmcc75\webNETmcc75
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/AccountController1/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudENvbnRyb2xsZXIxXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/AccountController1/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudENvbnRyb2xsZXIxXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/AccountController1/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudENvbnRyb2xsZXIxXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/AccountController1/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudENvbnRyb2xsZXIxXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/AccountController1/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudENvbnRyb2xsZXIxXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/AccountRole/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFJvbGVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,6 +34,30 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/AccountRole/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFJvbGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/Account/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/Account/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/Account/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/Account/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/Account/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/reyhan/source/repos/webNETmcc75/webNETmcc75/Views/Education/Create.cshtml]
