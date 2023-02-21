@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\webNETmcc75.props" />
+</Project>
