@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace webNETmcc75.ViewModels
 {
-    public class EducationVM
+    public class EducationUniversityVM
     {
         public int Id { get; set; }
         

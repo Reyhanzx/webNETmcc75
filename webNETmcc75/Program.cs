@@ -15,6 +15,7 @@ builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connect
 
 //depedency injection
 builder.Services.AddScoped<UniversityRepository>();
+builder.Services.AddScoped<EducationRepository>();
 
 var app = builder.Build();
 

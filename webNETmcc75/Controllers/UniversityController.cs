@@ -5,7 +5,7 @@ using webNETmcc75.Models;
 using webNETmcc75.Repositories;
 
 namespace webNETmcc75.Controllers
-{
+{   
     public class UniversityController : Controller
     {
         private readonly UniversityRepository repository;
