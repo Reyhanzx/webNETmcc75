@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using webNETmcc75.Contexts;
 using webNETmcc75.Models;
 using webNETmcc75.ViewModels;
@@ -103,12 +104,20 @@ namespace webNETmcc75.Controllers
             if (ModelState.IsValid)
             {
                 // Bikin kondisi untuk mengecek apakah data university sudah ada
+              
                 University university = new University
                 {
                     Name = registerVM.UniversityName
                 };
-                context.Universities.Add(university);
-                context.SaveChanges();
+                if (context.Universities.Any(u => u.Name == university.Name) )
+                {
+                    university.Id = context.Universities.FirstOrDefault(u => u.Name == university.Name).Id;
+                }
+                else
+                {
+                    context.Universities.Add(university);
+                    context.SaveChanges();
+                }
 
                 Education education = new Education
                 {
@@ -162,7 +171,38 @@ namespace webNETmcc75.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+
+        }
+
+        // GET : Account/Login
+        public IActionResult Login()
+        {
+
+            return View();
             
+        }
+
+        // POST : Account/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(LoginVM loginVM)
+        {
+            var results = context.Employees.Join(
+                context.Accounts,
+                e => e.Nik,
+                a => a.EmployeeNik,
+           (e, a) => new LoginVM
+           {
+               Email = e.Email,
+               Password = a.Password,
+           });
+           
+            if (results.Any(e => e.Email == loginVM.Email && e.Password == loginVM.Password))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError(string.Empty, "salah");
+            return View();
         }
     }
 }

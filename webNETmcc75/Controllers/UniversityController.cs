@@ -2,24 +2,25 @@
 using Microsoft.EntityFrameworkCore;
 using webNETmcc75.Contexts;
 using webNETmcc75.Models;
+using webNETmcc75.Repositories;
 
 namespace webNETmcc75.Controllers
 {
     public class UniversityController : Controller
     {
-        private readonly MyContext context;
-        public UniversityController(MyContext context)
+        private readonly UniversityRepository repository;
+        public UniversityController(UniversityRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
         public IActionResult Index()
         {
-            var universities = context.Universities.ToList();
+            var universities = repository.GetAll();
             return View(universities);
         }
         public IActionResult Details(int id)
         {
-            var university = context.Universities.Find(id);
+            var university = repository.GetById(id);
             return View(university);
         }
         public IActionResult Create()
@@ -30,15 +31,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(University university)
         {
-            context.Add(university);
-            var result = context.SaveChanges();
+            var result = repository.Insert(university);
             if (result > 0)
             return RedirectToAction(nameof(Index));
             return View();
         }
         public IActionResult Edit(int id)
         {
-            var university = context.Universities.Find(id);
+            var university = repository.GetById(id);
             return View(university);
         }
 
@@ -46,8 +46,7 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(University university)
         {
-            context.Entry(university).State = EntityState.Modified;
-            var result = context.SaveChanges();
+           var result = repository.Update(university);
             if (result > 0)
             {
                 return RedirectToAction(nameof(Index));
@@ -56,19 +55,22 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var university = context.Universities.Find(id);
+            var university = repository.GetById(id);
             return View(university);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Remove(int id)
         {
-            var university = context.Universities.Find(id);
-            context.Remove(university);
-            var result = context.SaveChanges();
-            if (result > 0)
+            var result = repository.Delete(id);
+            if (result == 0)
+            {
+                //data tidak ditemuakn
+            }
+            else
             {
                 return RedirectToAction(nameof(Index));
+
             }
             return View();
         }

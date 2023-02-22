@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using webNETmcc75.Contexts;
+using webNETmcc75.Repositories;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,10 @@ builder.Services.AddControllersWithViews();
 
 //configure dbcontext to sql server db
 var connectionString = builder.Configuration.GetConnectionString("connection");
-builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connectionString));   
+builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connectionString));
 
+//depedency injection
+builder.Services.AddScoped<UniversityRepository>();
 
 var app = builder.Build();
 
