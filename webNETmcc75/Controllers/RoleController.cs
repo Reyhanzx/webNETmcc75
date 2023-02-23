@@ -2,24 +2,25 @@
 using Microsoft.EntityFrameworkCore;
 using webNETmcc75.Contexts;
 using webNETmcc75.Models;
+using webNETmcc75.Repositories;
 
 namespace webNETmcc75.Controllers
 {
     public class RoleController : Controller
     {
-        private readonly MyContext context;
-        public RoleController(MyContext context)
+        private readonly RoleRepository repository;
+        public RoleController(RoleRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
         public IActionResult Index()
         {
-            var role = context.Roles.ToList();
+            var role = repository.GetAll();
             return View(role);
         }
         public IActionResult Details(int id)
         {
-            var role = context.Roles.Find(id);
+            var role = repository.GetById(id);
             return View(role);
         }
         public IActionResult Create()
@@ -30,15 +31,15 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Role role)
         {
-            context.Add(role);
-            var result = context.SaveChanges();
+            
+            var result = repository.Insert(role);
             if (result > 0)
                 return RedirectToAction(nameof(Index));
             return View();
         }
         public IActionResult Edit(int id)
         {
-            var role = context.Roles.Find(id);
+            var role = repository.GetById(id);
             return View(role);
         }
 
@@ -46,8 +47,8 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Role role)
         {
-            context.Entry(role).State = EntityState.Modified;
-            var result = context.SaveChanges();
+            
+            var result = repository.Update(role);
             if (result > 0)
             {
                 return RedirectToAction(nameof(Index));
@@ -56,19 +57,22 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var role = context.Roles.Find(id);
+            var role = repository.GetById(id);
             return View(role);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Remove(int id)
         {
-            var role = context.Roles.Find(id);
-            context.Remove(role);
-            var result = context.SaveChanges();
-            if (result > 0)
+            var result = repository.Delete(id);
+            if (result == 0)
+            {
+                //data tidak ditemuakn
+            }
+            else
             {
                 return RedirectToAction(nameof(Index));
+
             }
             return View();
         }

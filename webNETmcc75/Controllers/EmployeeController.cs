@@ -3,47 +3,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using webNETmcc75.Contexts;
 using webNETmcc75.Models;
+using webNETmcc75.Repositories;
 using webNETmcc75.ViewModels;
 
 namespace webNETmcc75.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly MyContext context;
-        public EmployeeController(MyContext context)
+        private readonly EmployeeRepository repository;
+        public EmployeeController(EmployeeRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
         public IActionResult Index()
         {
             //var employees = context.Employees.ToList();
-            var results = context.Employees.Select(e => new EmployeeVM
-            {
-                Nik = e.Nik,
-                FirstName = e.FirstName,
-                LastName = e.LastName,
-                BirthDate = e.BirthDate,
-                Gender = (ViewModels.GenderEnum)e.Gender,
-                HireingDate = e.HireingDate,
-                Email = e.Email,
-                PhoneNumber = e.PhoneNumber
-            }).ToList();
+            var results = repository.GetAllEmployees();
             return View(results);
         }
         public IActionResult Details(string id)
         {
-            var employee = context.Employees.Find(id);
-            return View(new EmployeeVM
-            {
-                Nik = employee.Nik,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                BirthDate = employee.BirthDate,
-                Gender = (ViewModels.GenderEnum)employee.Gender,
-                HireingDate = employee.HireingDate,
-                Email = employee.Email,
-                PhoneNumber = employee.PhoneNumber,
-            });
+            var employee = repository.GetByIdEmployee(id);
+            return View(employee);
         }
         public IActionResult Create()
         {
@@ -60,45 +41,7 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(EmployeeVM employee)
         {
-            
-            context.Add(new Employee
-            {
-                Nik= employee.Nik,
-                FirstName= employee.FirstName,
-                LastName= employee.LastName,
-                BirthDate= employee.BirthDate,
-                Gender= (Models.GenderEnum)employee.Gender,
-                HireingDate= employee.HireingDate,
-                Email= employee.Email,
-                PhoneNumber= employee.PhoneNumber,
-            } );
-            var result = context.SaveChanges();
-            if (result > 0)
-                return RedirectToAction(nameof(Index));
-            return View();
-        }
-        public IActionResult Edit(string id)
-        {
-            var employee = context.Employees.Find(id);
-            return View(new EmployeeVM
-            {
-                Nik = employee.Nik,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                BirthDate = employee.BirthDate,
-                Gender = (ViewModels.GenderEnum)employee.Gender,
-                HireingDate = employee.HireingDate,
-                Email = employee.Email,
-                PhoneNumber = employee.PhoneNumber,
-            });
-            return View(employee);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(EmployeeVM employee)
-        {
-            context.Entry(new Employee
+            var result = repository.Insert(new Employee
             {
                 Nik = employee.Nik,
                 FirstName = employee.FirstName,
@@ -108,8 +51,32 @@ namespace webNETmcc75.Controllers
                 HireingDate = employee.HireingDate,
                 Email = employee.Email,
                 PhoneNumber = employee.PhoneNumber,
-            }).State = EntityState.Modified;
-            var result = context.SaveChanges();
+            });
+            if (result > 0)
+                return RedirectToAction(nameof(Index));
+            return View();
+        }
+        public IActionResult Edit(string id)
+        {
+            var employee = repository.GetByIdEmployee(id);
+            return View(employee);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(EmployeeVM employee)
+        {
+            var result = repository.Update(new Employee
+            {
+                Nik = employee.Nik,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                BirthDate = employee.BirthDate,
+                Gender = (Models.GenderEnum)employee.Gender,
+                HireingDate = employee.HireingDate,
+                Email = employee.Email,
+                PhoneNumber = employee.PhoneNumber,
+            });
             if (result > 0)
             {
                 return RedirectToAction(nameof(Index));
@@ -118,30 +85,22 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Delete(string id)
         {
-            var employee = context.Employees.Find(id);
-            return View(new EmployeeVM
-            {
-                Nik = employee.Nik,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                BirthDate = employee.BirthDate,
-                Gender = (ViewModels.GenderEnum)employee.Gender,
-                HireingDate = employee.HireingDate,
-                Email = employee.Email,
-                PhoneNumber = employee.PhoneNumber,
-            });
+            var employee = repository.GetByIdEmployee(id);
             return View(employee);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Remove(string nik)
         {
-            var employee = context.Employees.Find(nik);
-            context.Remove(employee);
-            var result = context.SaveChanges();
-            if (result > 0)
+            var result = repository.Delete(nik);
+            if (result == 0)
+            {
+                //data tidak ditemuakn
+            }
+            else
             {
                 return RedirectToAction(nameof(Index));
+
             }
             return View();
         }
