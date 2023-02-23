@@ -107,7 +107,7 @@ namespace webNETmcc75.Controllers
                 // Bikin kondisi untuk mengecek apakah data university sudah ada
 
                 var result = repository.Register(registerVM);
-                if (result > 0)
+                if (result == 0)
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -133,10 +133,49 @@ namespace webNETmcc75.Controllers
            
             if (repository.Login(loginVM))
             {
+                var userdata = repository.GetUserdata(loginVM.Email);
+              
+                
+
+                HttpContext.Session.SetString("email", userdata.Email);
+                HttpContext.Session.SetString("fullname", userdata.FullName);
+                HttpContext.Session.SetString("role", userdata.Role);
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError(string.Empty, "salah");
             return View();
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        //public IActionResult ForgetPass()
+        //{
+
+        //    return View();
+
+        //}
+
+        //// POST : Account/ForgetPass
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ForgetPass(LoginVM loginVM)
+        //{
+
+
+        //    if (repository.Login(loginVM))
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //    ModelState.AddModelError(string.Empty, "salah");
+        //    return View();
+        //}
     }
 }
