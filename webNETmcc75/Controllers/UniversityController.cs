@@ -15,22 +15,48 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+           
             var universities = repository.GetAll();
             return View(universities);
         }
         public IActionResult Details(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            
             var university = repository.GetById(id);
             return View(university);
         }
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(University university)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Insert(university);
             if (result > 0)
             return RedirectToAction(nameof(Index));
@@ -38,6 +64,14 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var university = repository.GetById(id);
             return View(university);
         }
@@ -46,7 +80,15 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(University university)
         {
-           var result = repository.Update(university);
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
+            var result = repository.Update(university);
             if (result > 0)
             {
                 return RedirectToAction(nameof(Index));
@@ -55,6 +97,14 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Delete(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var university = repository.GetById(id);
             return View(university);
         }
@@ -62,6 +112,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Remove(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Delete(id);
             if (result == 0)
             {

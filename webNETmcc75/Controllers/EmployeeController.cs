@@ -17,17 +17,41 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             //var employees = context.Employees.ToList();
             var results = repository.GetAllEmployees();
             return View(results);
         }
         public IActionResult Details(string id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var employee = repository.GetByIdEmployee(id);
             return View(employee);
         }
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             //var employees = context.Employees.ToList()
             //    .Select(e => new SelectListItem
             //    {
@@ -41,6 +65,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(EmployeeVM employee)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Insert(new Employee
             {
                 Nik = employee.Nik,
@@ -58,6 +90,14 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Edit(string id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var employee = repository.GetByIdEmployee(id);
             return View(employee);
         }
@@ -66,6 +106,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(EmployeeVM employee)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Update(new Employee
             {
                 Nik = employee.Nik,
@@ -85,6 +133,14 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Delete(string id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var employee = repository.GetByIdEmployee(id);
             return View(employee);
         }
@@ -92,6 +148,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Remove(string nik)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Delete(nik);
             if (result == 0)
             {

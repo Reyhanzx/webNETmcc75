@@ -18,7 +18,7 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Index()
         {
-            var accounts = repository.GetAll;
+            var accounts = repository.GetAll();
             return View(accounts);
         }
         //public IActionResult Details(int id)

@@ -28,7 +28,7 @@
                         </li>
                         @if (@HttpContextAccessor.HttpContext.Session.GetString("fullname") != null)
                         {
-                             <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="index">Employee</a>
                         </li>
                         <li class="nav-item">
@@ -36,6 +36,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Education" asp-action="index">Education</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="index">Role</a>
                         </li>
                         }
                        

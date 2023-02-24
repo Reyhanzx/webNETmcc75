@@ -16,7 +16,7 @@ builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connect
 // Configure Session
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromSeconds(20);
 });
 //depedency injection
 builder.Services.AddScoped<UniversityRepository>();

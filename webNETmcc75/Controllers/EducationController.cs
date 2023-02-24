@@ -20,16 +20,32 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
             var result = repository.GetAllEducationUniversities();
             return View(result);
         }
         public IActionResult Details(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
             var education = repository.GetByIdlEducationUniversities(id);
             return View(education); 
         }
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var universities = universityRepository.GetAll()
                 .Select(u => new SelectListItem
                 {
@@ -43,6 +59,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(EducationUniversityVM education)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Insert(new Education
             {
                 Id = education.Id,
@@ -61,6 +85,14 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var universities = universityRepository.GetAll()
                 .Select(u => new SelectListItem
                 {
@@ -75,6 +107,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(EducationUniversityVM education)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Update(new Education
             {
                 Id = education.Id,
@@ -91,6 +131,14 @@ namespace webNETmcc75.Controllers
         }
         public IActionResult Delete(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var education = repository.GetByIdlEducationUniversities(id);
             return View(education);
         }
@@ -98,6 +146,14 @@ namespace webNETmcc75.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Remove(int id)
         {
+            if (HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Unauthorized", "Error");
+            }
+            if (HttpContext.Session.GetString("role") != "Admin")
+            {
+                return RedirectToAction("Forbidden", "Error");
+            }
             var result = repository.Delete(id);
             if (result == 0)
             {
