@@ -2,6 +2,10 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using webNETmcc75.Contexts;
 using webNETmcc75.Models;
 using webNETmcc75.Repositories;
@@ -12,13 +16,15 @@ namespace webNETmcc75.Controllers
     public class AccountController : Controller
     {
         private readonly AccountRepository repository;
-        public AccountController(AccountRepository repository)
+        private readonly IConfiguration configuration;
+        public AccountController(AccountRepository repository, IConfiguration configuration)
         {
             this.repository = repository;
+            this.configuration = configuration;
         }
         public IActionResult Index()
         {
-            var accounts = repository.GetAll();
+            var accounts = repository.GetAll() ;
             return View(accounts);
         }
         //public IActionResult Details(int id)
@@ -134,12 +140,37 @@ namespace webNETmcc75.Controllers
             if (repository.Login(loginVM))
             {
                 var userdata = repository.GetUserdata(loginVM.Email);
-              
-                
 
-                HttpContext.Session.SetString("email", userdata.Email);
-                HttpContext.Session.SetString("fullname", userdata.FullName);
-                HttpContext.Session.SetString("role", userdata.Role);
+                var roles = repository.GetRolesByNik(loginVM.Email);
+
+                var claims = new List<Claim>()
+                {
+                new Claim(ClaimTypes.Email, userdata.Email),
+                new Claim(ClaimTypes.Name, userdata.FullName)
+                };
+
+                foreach (var item in roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, item));
+                }
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
+                var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var token = new JwtSecurityToken(
+                    issuer: configuration["JWT:Issuer"],
+                    audience: configuration["JWT:Audience"],
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(10),
+                    signingCredentials: signIn
+                    );
+
+                var generateToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+                HttpContext.Session.SetString("jwtoken", generateToken);
+
+                //HttpContext.Session.SetString("email", userdata.Email);
+                //HttpContext.Session.SetString("fullname", userdata.FullName);
+                //HttpContext.Session.SetString("role", userdata.Role);
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError(string.Empty, "salah");

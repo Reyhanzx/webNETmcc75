@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "m0cK8keMzYRC+EkCnbulHee6azHyqgYGNnmjZHNZeRjhwwa6hoWGw/04z+bAGZYLEekQcuEE68dtDjdS/ixT9g==",
+  "dgSpecHash": "ZNbc3I0RO+9FWn35ibpOJDdg8vnAUoCIOk6rvLvCZRzL4PzJAKi0VPRU9dp9YghOWbw94OuhYhudyCkxCu1GKQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\reyhan\\source\\repos\\webNETmcc75\\webNETmcc75\\webNETmcc75.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\reyhan\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\reyhan\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.14\\microsoft.aspnetcore.authentication.jwtbearer.6.0.14.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.0\\microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\microsoft.build\\17.3.2\\microsoft.build.17.3.2.nupkg.sha512",

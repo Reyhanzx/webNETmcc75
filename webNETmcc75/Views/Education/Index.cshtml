@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    @if (@HttpContextAccessor.HttpContext.Session.GetString("role") == "Admin")
+    @if (User.IsInRole("Admin"))
     {
         <a asp-action="Create">Create New</a>
     }
@@ -33,7 +33,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            @if (@HttpContextAccessor.HttpContext.Session.GetString("role") == "Admin")
+            @if (User.IsInRole("Admin"))
             {
                 <td>
 

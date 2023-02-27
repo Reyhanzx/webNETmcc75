@@ -287,3 +287,4 @@ C:\Users\reyhan\source\repos\webNETmcc75\webNETmcc75\bin\Debug\net6.0\runtimes\u
 C:\Users\reyhan\source\repos\webNETmcc75\webNETmcc75\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\reyhan\source\repos\webNETmcc75\webNETmcc75\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\reyhan\source\repos\webNETmcc75\webNETmcc75\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\reyhan\source\repos\webNETmcc75\webNETmcc75\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
