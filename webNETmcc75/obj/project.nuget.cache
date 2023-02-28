@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ZNbc3I0RO+9FWn35ibpOJDdg8vnAUoCIOk6rvLvCZRzL4PzJAKi0VPRU9dp9YghOWbw94OuhYhudyCkxCu1GKQ==",
+  "dgSpecHash": "+6JF8do6i2dNzFmNWJitE5bYEOitohY7KxdIeoDKZOoZ7nCzrpvcV3DBRQ9Slr6xM2X2h3CeGInWmPBzeWnuRA==",
   "success": true,
   "projectFilePath": "C:\\Users\\reyhan\\source\\repos\\webNETmcc75\\webNETmcc75\\webNETmcc75.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\reyhan\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\reyhan\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\reyhan\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

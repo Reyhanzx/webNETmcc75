@@ -1,4 +1,5 @@
 ﻿using webNETmcc75.Contexts;
+using webNETmcc75.Handlers;
 using webNETmcc75.Models;
 using webNETmcc75.Repositories.Interface;
 using webNETmcc75.ViewModels;
@@ -85,7 +86,7 @@ namespace webNETmcc75.Repositories
             Account account = new Account
             {
                 EmployeeNik = registerVM.Nik,
-                Password = registerVM.Password
+                Password = Hashing.HashPassword(registerVM.Password)
             };
             context.Accounts.Add(account);
             context.SaveChanges();
@@ -119,8 +120,13 @@ namespace webNETmcc75.Repositories
            {
                Email = e.Email,
                Password = a.Password,
-           });
-            return result.Any(e => e.Email == loginVM.Email && e.Password == loginVM.Password);
+           }).FirstOrDefault(a=> a.Email ==loginVM.Email);
+
+            if (result is null)
+            {
+                return false;
+            }
+            return Hashing.ValidatePassword(loginVM.Password, result.Password );
         }
 
         public UserdataVM GetUserdata(string email)
